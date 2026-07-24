@@ -4,28 +4,28 @@ description: >-
   How an autonomous agent (e.g. a Claude bot) plays GULD, the on-chain jackpot game on
   Robinhood Chain, fully on-chain from its own wallet. Covers the economics, the GuldRoom
   contract interface, reading room state, pricing and placing deposits (minting gulden),
-  farming dividends, sniping the vault, and claiming winnings — with a viem example the
+  farming dividends, sniping the vault, and claiming winnings - with a viem example the
   agent can adapt and run itself.
 ---
 
 # Playing GULD as an agent
 
 This skill lets an autonomous agent play GULD entirely on-chain, signing from its own
-wallet. There is no backend and no API — the agent reads and writes the `GuldRoom`
+wallet. There is no backend and no API - the agent reads and writes the `GuldRoom`
 contract directly (viem/ethers or raw JSON-RPC). Everything below is what it needs.
 
 GULD is a transparent, honest-ponzi jackpot game. Each **room** is one `GuldRoom`
 contract. You deposit **ETH** to mint permanent **gulden**; every deposit pays
 dividends to everyone who came before you, adds to a **jackpot vault**, and pushes a
 countdown timer forward. When the timer runs out, the **last depositor wins the whole
-vault**. There is no sell — gulden are forever.
+vault**. There is no sell - gulden are forever.
 
 Two independent ways a bot makes ETH:
-1. **Dividend farming** — hold gulden early; earn 40% of every later deposit, pro-rata
+1. **Dividend farming** - hold gulden early; earn 40% of every later deposit, pro-rata
    to your share of the gulden supply.
-2. **Jackpot snipe** — be the `lastBuyer` when the timer expires and take the vault.
+2. **Jackpot snipe** - be the `lastBuyer` when the timer expires and take the vault.
 
-Everything is on-chain and permissionless. No API keys, no accounts — just a funded
+Everything is on-chain and permissionless. No API keys, no accounts - just a funded
 wallet and the room address.
 
 ---
@@ -47,7 +47,7 @@ For a deposit of `cost` wei of ETH:
   accrue and pay out in that token. **You still deposit ETH** either way.
 
 **Custom-token launch rooms** (`burnsToken() == true`): the 10% seed slice is split into
-**5% seed + 5% burn** — that 5% of every deposit is bought as the token and sent to the
+**5% seed + 5% burn** - that 5% of every deposit is bought as the token and sent to the
 dead address, so playing the room is continuously **deflationary** for that token. All
 other slices are unchanged (40/40 vault/dividends, 5/5 stakers/treasury).
 
@@ -61,7 +61,7 @@ nextPrice() = basePrice + slope*s                          // price of the next 
 ```
 
 `basePrice` and `slope` are per-room immutables. The curve is steeper in stock rooms.
-Overpaying is safe — `buy` refunds anything above `costFor(n)`.
+Overpaying is safe - `buy` refunds anything above `costFor(n)`.
 
 ### Timer
 
@@ -197,11 +197,11 @@ setInterval(() => tick().catch(console.error), 3000);
 
 ## Safety notes
 
-- **Only ETH is at stake** — you deposit ETH; the worst case is losing your deposits when
+- **Only ETH is at stake** - you deposit ETH; the worst case is losing your deposits when
   the vault goes to someone else. Cap spend per round (`MAX_SPEND_ETH`).
-- The game is **honest but adversarial** — other bots snipe too; a snipe is only won if no
+- The game is **honest but adversarial** - other bots snipe too; a snipe is only won if no
   one deposits after you before `endsAt`.
 - **Everything is pull-based**: winnings and dividends sit in `claimableOf` until you
   `claim()`. They never expire. Claim on your own schedule to save gas.
-- **Never assume a room is safe by address alone** — verify `payoutToken`, `basePrice`,
+- **Never assume a room is safe by address alone** - verify `payoutToken`, `basePrice`,
   `slope`, `timeStep`, `timeCap` on-chain before playing an unfamiliar room.
