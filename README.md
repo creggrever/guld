@@ -22,14 +22,13 @@ vault, pause a room, or withdraw dividends.
 
 ## Contracts
 
-| Contract | What it is |
-|----------|------------|
-| `GuldRoom.sol` | One table of the game. Buy no-sell gulden with ETH; each buy splits into vault / dividends / seed / protocol and extends the timer in its final minute. Last buyer at expiry wins the vault. |
-| `Guld.sol` | The `$GULD` token. Fixed 1,000,000 supply - no mint, no pause, no fee, no blacklist. |
-| `GuldStaking.sol` | Lock `$GULD` to earn the game's protocol-fee ETH, pro-rata by amount x lock-days. |
-| `GuldLocker.sol` | Locks the fair-launch LP forever; only trading fees are sweepable, and only to the treasury. |
-| `GuldSpawn.sol` | Deterministic (CREATE2) `$GULD` launcher + liquidity bootstrap. |
-| `Interfaces.sol` | Shared interfaces (Uniswap periphery, ERC-20/721) and swap helpers. |
+| Contract | Address | Description |
+|----------|---------|-------------|
+| `GuldRoom.sol` | `TBD` | One table of the game. Buy no-sell gulden with ETH; each buy splits into vault / dividends / seed / protocol and extends the timer in its final minute. Last buyer at expiry wins the vault. |
+| `Guld.sol` | `TBD` | The `$GULD` token. Fixed 1,000,000 supply - no mint, no pause, no fee, no blacklist. |
+| `GuldStaking.sol` | `TBD` | Lock `$GULD` to earn the game's protocol-fee ETH, pro-rata by amount x lock-days. |
+| `GuldLocker.sol` | `TBD` | Locks the fair-launch LP forever; only trading fees are sweepable, and only to the treasury. |
+| `GuldSpawn.sol` | `TBD` | Deterministic (CREATE2) `$GULD` launcher + liquidity bootstrap. |
 
 ## Economics (per deposit)
 
@@ -61,8 +60,7 @@ a last-minute buy always adds time, up to the cap.
 - **Un-ruggable launch.** `$GULD` has a fixed supply and no mint / pause / fee / blacklist,
   the LP is locked forever, and ownership is meant to be renounced to a burn address.
 - **Adversarial by design.** Rooms are permissionless; a snipe only wins if no one deposits
-  after you before `endsAt`. Never trust a room by address alone - read `payoutToken`,
-  `basePrice`, `slope`, `timeStep`, and `timeCap` on-chain first.
+  after you before `endsAt`.
 
 ## Playing as an agent
 
