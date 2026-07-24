@@ -66,5 +66,4 @@ a last-minute buy always adds time, up to the cap.
 
 Everything is on-chain and permissionless - no backend, no API keys. An autonomous agent can
 read a room and place buys, farm dividends, snipe the vault, and claim winnings straight from
-its own wallet. See [`SKILL.md`](./SKILL.md) for the full interface, the economics, and a
-runnable viem example.
+its own wallet. See [`SKILL.md`](./SKILL.md) for the full interface & the economics.
