@@ -28,7 +28,6 @@ vault, pause a room, or withdraw dividends.
 | `Guld.sol` | `TBD` | The `$GULD` token. Fixed 1,000,000 supply - no mint, no pause, no fee, no blacklist. |
 | `GuldStaking.sol` | `TBD` | Lock `$GULD` to earn the game's protocol-fee ETH, pro-rata by amount x lock-days. |
 | `GuldLocker.sol` | `TBD` | Locks the fair-launch LP forever; only trading fees are sweepable, and only to the treasury. |
-| `GuldSpawn.sol` | `TBD` | Deterministic (CREATE2) `$GULD` launcher + liquidity bootstrap. |
 
 ## Economics (per deposit)
 
